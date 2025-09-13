@@ -1,0 +1,22 @@
+{
+  "name": "Kaoruko - Discord Bot",
+  "short_name": "Kaoruko",
+  "description": "The most advanced Discord bot with powerful features, seamless integration, and endless customization options.",
+  "icons": [
+    {
+      "src": "https://cdn.discordapp.com/avatars/1398003581512056854/a_940a43c9f073d76847788a8982f08c25.gif?size=192&animated=true",
+      "sizes": "192x192",
+      "type": "image/gif"
+    },
+    {
+      "src": "https://cdn.discordapp.com/avatars/1398003581512056854/a_940a43c9f073d76847788a8982f08c25.gif?size=512&animated=true",
+      "sizes": "512x512",
+      "type": "image/gif"
+    }
+  ],
+  "theme_color": "#6750A4",
+  "background_color": "#1C1B1F",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}
