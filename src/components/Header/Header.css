@@ -77,7 +77,6 @@
 
 .nav-link:hover,
 .nav-link:focus {
-    background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-primary);
     outline: none;
 }
@@ -158,30 +157,30 @@
 }
 
 .mobile-menu-toggle.active .hamburger {
-    transform: rotate(45deg);
-    background-color: transparent;
+    background-color: transparent; /* Hide the middle bar */
 }
 
 .mobile-menu-toggle.active .hamburger::before {
-    transform: rotate(90deg);
-    top: 0;
+    transform: rotate(-45deg); /* Rotate to form one arm of the X */
+    top: 0; /* Move to center */
 }
 
 .mobile-menu-toggle.active .hamburger::after {
-    transform: rotate(90deg);
-    top: 0;
+    transform: rotate(45deg); /* Rotate to form the other arm of the X */
+    top: 0; /* Move to center */
 }
 
 .mobile-nav {
     position: fixed;
     top: 0;
-    left: -80%; /* Hidden off-screen */
-    width: 80%;
+    right: -80vw; /* Start completely off-screen to the right */
+    width: 80vw;
+    opacity: 0; /* Start invisible */
+    transition: none; /* Prevent CSS transitions from interfering with Framer Motion */
     height: 100vh;
-    background: var(--md-sys-color-surface); /* Static background color */
+    background: var(--md-sys-color-surface);
     color: var(--md-sys-color-on-surface);
     padding: 60px 20px;
-    transition: left 0.3s ease-in-out;
     z-index: 99;
     overflow-y: auto;
     align-items: flex-start;

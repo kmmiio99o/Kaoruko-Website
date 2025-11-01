@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion, Variants } from "framer-motion"; // Import motion and Variants
 import { navigateAndScrollToTop } from "../../utils/scrollToTop";
 import "./Header.css";
 
 interface MobileMenuProps {
-  isMobileMenuOpen: boolean;
+  isMobileMenuOpen: boolean; // Keep this prop for consistency, though AnimatePresence handles mounting
   closeMobileMenu: () => void;
   menuItems: {
     path: string;
@@ -16,18 +17,42 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
-  isMobileMenuOpen,
   closeMobileMenu,
   menuItems,
   navigate,
 }) => {
   const location = useLocation();
 
+  const menuVariants: Variants = {
+    hidden: { x: "0%", opacity: 0 }, // Start off-screen to the right (CSS handles initial position)
+    visible: {
+      x: "-100%", // Slide to on-screen (right edge)
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      },
+    },
+    exit: {
+      x: "0%", // Slide off-screen to the right
+      opacity: 0,
+      transition: {
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      },
+    },
+  };
+
   return (
-    <div className={`mobile-nav ${isMobileMenuOpen ? "open" : ""}`}>
-      <button className="mobile-menu-close" onClick={closeMobileMenu}>
-        <span aria-hidden>×</span>
-      </button>
+    <motion.div
+      className="mobile-nav" // Remove the 'open' class toggle; Framer Motion handles visibility
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={menuVariants}
+    >
       {menuItems.map((item) => (
         <Link
           to={item.path}
@@ -43,7 +68,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           {item.name}
         </Link>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

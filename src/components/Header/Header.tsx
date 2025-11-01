@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { navigateAndScrollToTop } from "../../utils/scrollToTop";
 import "./Header.css";
 import MobileMenu from "./MobileMenu";
@@ -64,13 +65,11 @@ const Header: React.FC<HeaderProps> = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="mobile-menu-toggle"
+            className={`mobile-menu-toggle ${isMobileMenuOpen ? "active" : ""}`}
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
-            <span
-              className={`hamburger ${isMobileMenuOpen ? "active" : ""}`}
-            ></span>
+            <span className="hamburger"></span>
           </button>
 
           <nav className="nav">
@@ -101,14 +100,16 @@ const Header: React.FC<HeaderProps> = () => {
             </a>
           </div>
         </div>
-        {isMobileMenuOpen && (
-          <MobileMenu
-            isMobileMenuOpen={isMobileMenuOpen}
-            closeMobileMenu={closeMobileMenu}
-            navigate={navigate}
-            menuItems={menuItems}
-          />
-        )}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <MobileMenu
+              isMobileMenuOpen={isMobileMenuOpen}
+              closeMobileMenu={closeMobileMenu}
+              navigate={navigate}
+              menuItems={menuItems}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
