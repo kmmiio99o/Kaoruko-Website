@@ -1,0 +1,207 @@
+/* Kaoruko Website — Home page (lean)
+   Purpose: minimal, focused styles for the simplified Home page.
+   This stylesheet intentionally avoids unused components (stats, large CTAs, etc.)
+   and relies on global design tokens defined in App.css (e.g. --md-sys-color-*) */
+
+/* Page base */
+.home-page {
+    background: var(--md-sys-color-surface, #0f1115);
+    color: var(--md-sys-color-on-surface, #e6eef8);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Simple, shared container (kept small here for page-level control) */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---------- Primary action row (Invite / Docs / Commands) ---------- */
+.home-actions.container {
+    padding: 28px 20px;
+    display: block;
+    text-align: center;
+}
+
+.actions-row {
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+/* Button primitives (kept small and reused across the app) */
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        transform 150ms ease,
+        box-shadow 150ms ease,
+        opacity 120ms ease;
+}
+
+/* Primary — filled */
+.btn-primary {
+    background: linear-gradient(
+        180deg,
+        var(--md-sys-color-primary),
+        var(--md-sys-color-primary-container, rgba(99, 102, 241, 0.95))
+    );
+    color: var(--md-sys-color-on-primary, #fff);
+    border: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Secondary — subtle */
+.btn-secondary {
+    background: transparent;
+    color: var(--md-sys-color-on-surface, #e6eef8);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: rgba(255, 255, 255, 0.02);
+    transform: translateY(-2px);
+}
+
+/* Outline / link-style */
+.btn-outline {
+    background: transparent;
+    color: var(--md-sys-color-primary, #6a17cb);
+    border: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+/* Small descriptive text below the actions */
+.home-actions .muted {
+    color: rgba(230, 238, 248, 0.72);
+    font-size: 0.94rem;
+    margin-top: 6px;
+}
+
+/* ---------- Small action cards variant (if used) ---------- */
+.quick-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--md-sys-color-on-surface, #e6eef8);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    min-width: 220px;
+}
+
+/* When quick-action appears as a button element */
+.quick-action button,
+.quick-action[role="button"] {
+    background: none;
+    border: none;
+}
+
+.action-icon {
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.action-title {
+    font-weight: 700;
+}
+
+.action-sub {
+    color: rgba(230, 238, 248, 0.78);
+    font-size: 0.92rem;
+    margin-top: 2px;
+}
+
+/* Accessibility focus styles for keyboard users */
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-outline:focus,
+.quick-action:focus {
+    outline: 3px solid rgba(106, 17, 203, 0.14);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+/* --------- Minimal Utility Typography --------- */
+.small {
+    font-size: 0.88rem;
+}
+
+.muted {
+    color: rgba(230, 238, 248, 0.72);
+}
+
+/* Ensure hero and features sections keep spacing with the actions row */
+.hero + .home-actions.container,
+.hero + .container.home-actions {
+    margin-top: -8px; /* tighten spacing with hero if needed */
+}
+
+/* --------- Responsive adjustments --------- */
+@media (max-width: 880px) {
+    .actions-row {
+        gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        min-width: 96px;
+        height: 42px;
+        padding: 0 10px;
+    }
+
+    .quick-action {
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 560px) {
+    .actions-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .quick-action {
+        width: 100%;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+}
