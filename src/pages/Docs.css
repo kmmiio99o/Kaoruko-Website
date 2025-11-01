@@ -1,0 +1,471 @@
+/* Kaoruko-Website/src/pages/Docs.css
+   Material 3 inspired documentation styles for the Docs page.
+   Uses global color tokens defined in src/App.css ( --md-sys-color-* ).
+*/
+
+/* Page container */
+.docs-page {
+    background: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    padding: 28px 0 80px;
+    min-height: calc(100vh - 140px);
+    font-family: inherit;
+}
+
+/* Hero / header area */
+.docs-hero {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+    padding: 28px 0;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.docs-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 16px;
+}
+
+.docs-hero h1 {
+    margin: 6px 0;
+    font-weight: 600;
+    color: var(--md-sys-color-on-background);
+}
+
+.docs-hero-sub {
+    margin-top: 6px;
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 860px;
+}
+
+/* Main docs layout */
+.docs-body {
+    max-width: 1200px;
+    margin: 24px auto 0;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 28px;
+    padding: 0 16px;
+    align-items: start;
+}
+
+/* Sidebar (table of contents) */
+.docs-sidebar {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    height: calc(100vh - 120px);
+    overflow: auto;
+    padding: 8px;
+}
+
+/* small label above TOC */
+.docs-toc .label-large {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--md-sys-color-on-surface);
+    font-weight: 600;
+}
+
+/* TOC list */
+.docs-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Navigation buttons (no underline) */
+.docs-nav-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: var(--md-sys-color-on-surface-variant);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        color 150ms ease,
+        transform 130ms ease,
+        background 150ms ease,
+        box-shadow 120ms ease;
+    line-height: 1.2;
+}
+
+/* active state */
+.docs-nav-button.active,
+.docs-nav-button[aria-current="true"] {
+    color: var(--md-sys-color-primary);
+    background: var(--md-sys-color-primary-container);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    transform: translateX(2px);
+}
+
+/* hover & focus */
+.docs-nav-button:hover {
+    color: var(--md-sys-color-on-surface);
+    background: var(--md-sys-color-surface-container-high);
+    transform: translateX(4px);
+}
+
+.docs-nav-button:focus-visible {
+    outline: 3px solid var(--md-sys-color-primary);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+/* Quicklinks block in TOC */
+.docs-toc-quicklinks {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Buttons in quicklinks */
+.docs-toc-quicklinks .mdc-button {
+    font-size: 13px;
+}
+
+/* Main content area */
+.docs-content {
+    padding: 6px 4px;
+    display: block;
+}
+
+/* Section base */
+.docs-section {
+    margin-bottom: 28px;
+    padding: 18px;
+    border-radius: 12px;
+    background: var(--md-sys-color-surface-container-high);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* Section headings */
+.docs-section h2 {
+    margin: 2px 0 8px;
+    color: var(--md-sys-color-on-surface);
+    font-weight: 600;
+}
+
+/* Smaller titles inside cards */
+.title-medium {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Small titles */
+.title-small {
+    margin: 10px 0 6px;
+    font-size: 14px;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Paragraphs and body text */
+.body-large,
+.body-medium,
+.body-small {
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.5;
+}
+
+/* cards / grid inside docs */
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.docs-card {
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--md-sys-color-surface-container);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Note box */
+.docs-note {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+    color: var(--md-sys-color-on-surface-variant);
+    border: 1px solid var(--md-sys-color-surface-variant);
+}
+
+/* code block styling */
+.docs-code,
+code,
+pre.code-block,
+pre.docs-code {
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono",
+        "Courier New", monospace;
+}
+
+pre.docs-code,
+pre.code-block {
+    background: var(--md-sys-color-surface-container-low);
+    color: var(--md-sys-color-on-surface);
+    padding: 14px;
+    border-radius: 10px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+/* inline code */
+code {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    color: var(--md-sys-color-on-surface);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* tables */
+.docs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+}
+
+.docs-table th,
+.docs-table td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.docs-table th {
+    color: var(--md-sys-color-on-surface);
+    font-weight: 600;
+}
+
+/* lists */
+.docs-section ul,
+.docs-section ol {
+    margin: 8px 0 0 18px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* footer note in docs */
+.docs-footer {
+    margin-top: 18px;
+    padding: 10px 12px;
+    color: var(--md-sys-color-on-surface-variant);
+    text-align: left;
+}
+
+/* small responsive tweaks */
+
+/* Tablet & small desktop */
+@media (max-width: 1024px) {
+    .docs-body {
+        grid-template-columns: 260px 1fr;
+    }
+
+    .docs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+    .docs-body {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+    }
+
+    .docs-sidebar {
+        position: relative;
+        height: auto;
+        margin-bottom: 12px;
+        top: auto;
+    }
+
+    .docs-nav-button {
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+
+    .docs-hero-inner {
+        padding: 0 6px;
+    }
+
+    .docs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-section {
+        padding: 12px;
+    }
+}
+
+/* Accessibility helpers */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+/* small utility */
+.docs-code-inline {
+    font-family: ui-monospace, Menlo, Monaco, "Roboto Mono", monospace;
+    font-size: 13px;
+    background: var(--md-sys-color-surface-container-low);
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface);
+}
+
+/* -------------------------
+   Docs link card styles
+   (for References & Links)
+   ------------------------- */
+
+/* Grid wrapper for link cards */
+.docs-link-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* Individual link card appearance */
+.docs-link-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 10px;
+    background: linear-gradient(
+        180deg,
+        var(--md-sys-color-surface-container),
+        var(--md-sys-color-surface-container-high)
+    );
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: inherit;
+    text-decoration: none; /* remove underline */
+    transition:
+        transform 0.14s ease,
+        box-shadow 0.14s ease,
+        background 0.14s ease;
+}
+
+/* Remove default underline and enforce no-underline across the docs page */
+.docs-page a,
+.docs-page a:link,
+.docs-page a:visited,
+.docs-page a:hover,
+.docs-page a:active,
+.docs-content a,
+.docs-link-card,
+.docs-nav-button {
+    text-decoration: none !important;
+}
+
+/* Ensure buttons used as nav items also do not show textual decoration */
+.docs-nav-button,
+.docs-nav-button:hover,
+.docs-nav-button:active {
+    text-decoration: none !important;
+}
+
+/* Keep anchors keyboard-accessible with a clear focus ring (no underline) */
+.docs-page a:focus-visible,
+.docs-nav-button:focus-visible,
+.docs-link-card:focus-visible {
+    outline: 3px solid var(--md-sys-color-primary);
+    outline-offset: 3px;
+    text-decoration: none !important;
+}
+
+/* Hover / focus states for cards */
+.docs-link-card:hover,
+.docs-link-card:focus {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+        180deg,
+        var(--md-sys-color-surface-container-high),
+        var(--md-sys-color-surface-container)
+    );
+    outline: none;
+}
+
+/* Icon to the left of the card */
+.docs-link-card .link-icon {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 10px;
+    display: inline-grid;
+    place-items: center;
+    font-size: 20px;
+    background: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Body text inside card */
+.docs-link-card .link-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Title and description */
+.docs-link-card .link-title {
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    font-size: 14px;
+}
+
+.docs-link-card .link-desc {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Make the whole card keyboard-focusable */
+.docs-link-card:focus {
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.28),
+        0 0 0 5px rgba(76, 175, 80, 0.08);
+    outline: none;
+}
+
+/* Responsive: stack link cards on narrow screens */
+@media (max-width: 720px) {
+    .docs-link-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-link-card {
+        align-items: center;
+    }
+
+    .docs-link-card .link-icon {
+        min-width: 40px;
+        min-height: 40px;
+        font-size: 18px;
+    }
+}

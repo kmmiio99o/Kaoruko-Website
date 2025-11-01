@@ -1,6 +1,6 @@
 // src/App.tsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import PageTransition from "./components/PageTransition/PageTransition";
@@ -14,11 +14,15 @@ import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import "./App.css";
 
+// Lazy-load the Docs page (new page at /src/pages/Docs.tsx expected)
+import Docs from "./pages/Docs";
+
 function App() {
   return (
     <Router>
       <div className="App">
         <Header />
+
         <main className="main-content">
           <PageTransition>
             <Routes>
@@ -26,11 +30,12 @@ function App() {
               <Route path="/commands" element={<Commands />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/status" element={<Status />} />
-                      <Route path="/support" element={<Support />} />
-                      <Route path="/privacy" element={<Privacy />} />
-                      <Route path="/terms" element={<Terms />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
+              <Route path="/support" element={<Support />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </PageTransition>
         </main>
         <Footer />
