@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navigateAndScrollToTop } from "../../utils/scrollToTop";
 import "./Header.css";
+import MobileMenu from "./MobileMenu";
 
-const Header: React.FC = () => {
+interface HeaderProps {}
+
+const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -25,6 +28,15 @@ const Header: React.FC = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
+  const menuItems = [
+    { path: "/", name: "Home" },
+    { path: "/commands", name: "Commands" },
+    { path: "/dashboard", name: "Dashboard" },
+    { path: "/status", name: "Status" },
+    { path: "/support", name: "Support" },
+    { path: "/docs", name: "Docs", ariaLabel: "Documentation", title: "Docs" },
+  ];
 
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
@@ -50,69 +62,36 @@ const Header: React.FC = () => {
             <span className="logo-text">Kaoruko</span>
           </Link>
 
-          <nav className={`nav ${isMobileMenuOpen ? "nav-open" : ""}`}>
-            <button
-              className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
-              onClick={() => {
-                closeMobileMenu();
-                navigateAndScrollToTop(navigate, "/");
-              }}
-            >
-              Home
-            </button>
-            <button
-              className={`nav-link ${location.pathname === "/commands" ? "active" : ""}`}
-              onClick={() => {
-                closeMobileMenu();
-                navigateAndScrollToTop(navigate, "/commands");
-              }}
-            >
-              Commands
-            </button>
-            <button
-              className={`nav-link ${location.pathname === "/dashboard" ? "active" : ""}`}
-              onClick={() => {
-                closeMobileMenu();
-                navigateAndScrollToTop(navigate, "/dashboard");
-              }}
-            >
-              Dashboard
-            </button>
-            <button
-              className={`nav-link ${location.pathname === "/status" ? "active" : ""}`}
-              onClick={() => {
-                closeMobileMenu();
-                navigateAndScrollToTop(navigate, "/status");
-              }}
-            >
-              Status
-            </button>
-            <button
-              className={`nav-link ${location.pathname === "/support" ? "active" : ""}`}
-              onClick={() => {
-                closeMobileMenu();
-                navigateAndScrollToTop(navigate, "/support");
-              }}
-            >
-              Support
-            </button>
-            <button
-              className={`nav-link ${location.pathname === "/docs" ? "active" : ""}`}
-              onClick={() => {
-                closeMobileMenu();
-                navigateAndScrollToTop(navigate, "/docs");
-              }}
-              aria-label="Documentation"
-              title="Docs"
-            >
-              Docs
-            </button>
+          {/* Mobile Menu Toggle */}
+          <button
+            className="mobile-menu-toggle"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            <span
+              className={`hamburger ${isMobileMenuOpen ? "active" : ""}`}
+            ></span>
+          </button>
+
+          <nav className="nav">
+            {menuItems.map((item) => (
+              <Link
+                to={item.path}
+                key={item.name}
+                className={`nav-link ${location.pathname === item.path ? "active" : ""}`}
+                onClick={closeMobileMenu}
+                aria-label={item.ariaLabel}
+                title={item.title}
+              >
+                {item.name}
+              </Link>
+            ))}
           </nav>
 
           <div className="header-actions">
             <a
               href="https://discord.com/api/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot"
-              className="mdc-button mdc-button--filled btn-invite"
+              className="btn-invite"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Invite Kaoruko Bot"
@@ -120,17 +99,16 @@ const Header: React.FC = () => {
             >
               Invite Bot
             </a>
-            <button
-              className="mobile-menu-toggle"
-              onClick={toggleMobileMenu}
-              aria-label="Toggle mobile menu"
-            >
-              <span
-                className={`hamburger ${isMobileMenuOpen ? "active" : ""}`}
-              ></span>
-            </button>
           </div>
         </div>
+        {isMobileMenuOpen && (
+          <MobileMenu
+            isMobileMenuOpen={isMobileMenuOpen}
+            closeMobileMenu={closeMobileMenu}
+            navigate={navigate}
+            menuItems={menuItems}
+          />
+        )}
       </div>
     </header>
   );
