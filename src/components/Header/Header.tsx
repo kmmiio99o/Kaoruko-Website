@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = () => {
 
           <div className="header-actions">
             <a
-              href="https://discord.com/api/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot"
+              href="https://discord.com/oauth2/authorize?client_id=1398003581512056854&permissions=1377074007190&response_type=code&redirect_uri=https%3A%2F%2Fkaoruko-website.pages.dev%2F&integration_type=0&scope=bot+applications.commands.permissions.update+messages.read+applications.commands"
               className="btn-invite"
               target="_blank"
               rel="noopener noreferrer"
